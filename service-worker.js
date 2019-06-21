@@ -54,8 +54,17 @@ self.addEventListener('activate', function(event){
 	);
 })
 
+// INI UNTUK MELOAD SELURUH ISI DIRECTORY UTAMA (/)
 workbox.routing.registerRoute(
 	new RegExp('/'),
+	workbox.strategies.staleWhileRevalidate({
+		cacheName: CACHE_NAME
+	})
+);
+
+// INI UNTUK MELOAD END POINT API
+workbox.routing.registerRoute(
+	new RegExp('https:\/\/www.thesportsdb.com\/api\/v1\/json\/1\/'),
 	workbox.strategies.staleWhileRevalidate({
 		cacheName: CACHE_NAME
 	})
